@@ -1,0 +1,74 @@
+# ==========================================
+# 1. SECRETOS Y CREDENCIALES (CRÍTICO)
+# ==========================================
+*.pem
+*.key
+*.pub
+*.cer
+*.crt
+id_rsa*
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+*.env
+master/.env
+connector/.env
+
+# ==========================================
+# 2. DEPENDENCIAS (Node.js)
+# ==========================================
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================================
+# 3. BUILD / COMPILADOS
+# ==========================================
+dist/
+*/dist/
+build/
+*/build/
+*.tsbuildinfo
+
+# ==========================================
+# 4. TESTS Y COBERTURA
+# ==========================================
+coverage/
+*/coverage/
+.nyc_output/
+
+# ==========================================
+# 5. SISTEMA OPERATIVO E IDES
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ==========================================
+# 6. LOGS Y DATOS TEMPORALES
+# ==========================================
+logs/
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+.temp/
+.tmp/
+pgdata/
+
+

@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: energy
+      POSTGRES_PASSWORD: energy
+      POSTGRES_DB: energyshark
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U energy -d energyshark"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  master:
+    build: ./master
+    ports:
+      - "3001-3002:3000"
+    environment:
+      DATABASE_URL: postgres://energy:energy@db:5432/energyshark
+      DB_SSL: "false"
+      PORT: "3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  connector:
+    build: ./connector
+    environment:
+      AMQP_URL: ${AMQP_URL}
+      QUEUE_NAME: ${QUEUE_NAME}
+      MASTER_URL: http://master:3000
+    depends_on:
+      master:
+        condition: service_healthy
+
+volumes:
+  pgdata:
