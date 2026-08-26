@@ -4,26 +4,26 @@ Sistema distribuido para la ingesta, almacenamiento y consulta histórica de mé
 
 ---
 
-## 🌐 Información de Despliegue y Acceso
+## Información de Despliegue y Acceso
 
 * **Dominio Público:** [http://energy-shark-2173.duckdns.org](http://energy-shark-2173.duckdns.org)
-* **IP Pública:** `3.17.132.26` *(Elastic IP reservada: `18.118.118.215`)*
+* **IP Pública:**  `18.118.118.215`
 * **Región AWS:** `us-east-2` (Ohio)
 
-### 🔑 Acceso SSH al Servidor EC2
+### Acceso SSH al Servidor EC2
 El archivo de clave privada `.pem` ha sido subido directamente al **buzón de entregas en Canvas**
 
 Para conectarse al servidor vía SSH:
 ```bash
 ssh -i <tu-archivo-clave>.pem ubuntu@energy-shark-2173.duckdns.org
 # o alternativamente por IP:
-ssh -i <tu-archivo-clave>.pem ubuntu@3.17.132.26
+ssh -i <tu-archivo-clave>.pem ubuntu@18.118.118.215
 ```
 
 ---
 
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
 ```
 RabbitMQ (broker.iic2173.org:5671 / vhost energy)
@@ -43,7 +43,7 @@ Cliente / Web (http://energy-shark-2173.duckdns.org)
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 * **Servicio Web (`master`):** Node.js 20, NestJS, TypeORM, `class-validator`, `pg`.
 * **Consumidor (`connector`):** Node.js 20, NestJS, `amqplib` (AMQPS TLS).
@@ -54,7 +54,7 @@ Cliente / Web (http://energy-shark-2173.duckdns.org)
 
 ---
 
-## 📡 Endpoints de la API
+## Endpoints de la API
 
 | Método | Endpoint | Descripción | Parámetros / Query Params |
 | :--- | :--- | :--- | :--- |
@@ -84,7 +84,7 @@ curl "http://energy-shark-2173.duckdns.org/master2/health"
 
 ---
 
-## 🚀 Despliegue y Ejecución
+## Deploy y Ejecución
 
 ### 1. Variables de Entorno (`.env`)
 Crear un archivo `.env` en la raíz del proyecto:
@@ -110,7 +110,7 @@ upstream energyshark_backend {
 
 server {
     listen 80;
-    server_name energy-shark-2173.duckdns.org 3.17.132.26;
+    server_name energy-shark-2173.duckdns.org;
 
     location / {
         proxy_pass http://energyshark_backend;
