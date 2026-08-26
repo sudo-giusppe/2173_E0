@@ -18,8 +18,8 @@ services:
     ports:
       - "3001-3002:3000"
     environment:
-      DATABASE_URL: postgres://energy:energy@db:5432/energyshark
-      DB_SSL: "false"
+      DATABASE_URL: ${DATABASE_URL}
+      DB_SSL: "true"
       PORT: "3000"
     depends_on:
       db:
