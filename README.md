@@ -22,8 +22,27 @@ ssh -i <tu-archivo-clave>.pem ubuntu@18.118.118.215
 
 ---
 
+## Niveles de Logro
 
-## Arquitectura del Sistema
+### Parte Mínima (75%)
+- **RF1 (3p):** Logrado — `GET /history` lista el historial de demanda.
+- **RF2 (1p):** Logrado — `GET /history/:id` entrega el detalle individual por UUID.
+- **RF3 (2p):** Logrado — Paginación por defecto de 25 registros con soporte de `page` y `limit`.
+- **RF4 (4p):** Logrado — Filtros por `city`, `idpk`, `type` y rango de fechas `from`/`to`.
+- **RNF1 (5p):** Logrado — Consumidor AMQP resiliente con reconexión automática y reenvío POST.
+- **RNF2 (4p):** Logrado — Despliegue containerizado en red compartida de Docker.
+- **RNF3 (3p):** Logrado — Reverse proxy Nginx instalado en el host EC2.
+- **RNF4 (2p):** Logrado — Dominio público en `energy-shark-2173.duckdns.org`.
+- **RNF5 (2p):** Logrado — Instancia EC2 en AWS (`t3.micro`).
+- **RNF6 (2p):** Logrado — Base de datos PostgreSQL externa en AWS RDS con SSL.
+- **RNF7 (2p):** Logrado — HEALTHCHECK activo en todos los contenedores (`/health`).
+- **Docker Compose (15p):** Logrado — Orquestación completa de `master`, `connector` y `db`.
+
+### Parte Variable — Balanceo de Carga con Nginx (25%)
+- **RF1 (5p):** Logrado — `master` replicado en 2 contenedores paralelos (`--scale master=2`).
+- **RF2 (10p):** Logrado — Instancias alcanzables individualmente vía `/master1/` y `/master2/` además del balanceo en `/`.
+
+---
 
 ```
 RabbitMQ (broker.iic2173.org:5671 / vhost energy)
